@@ -237,6 +237,10 @@ def main():
     dir_exists = os.path.exists("plot_results")
     if not dir_exists:
         os.makedirs("plot_results")
+
+    dir_exists = os.path.exists("models")
+    if not dir_exists:
+        os.makedirs("models")
     # ------------------------------------------------#
 
     # set seeds
