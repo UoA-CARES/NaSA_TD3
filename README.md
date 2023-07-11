@@ -18,6 +18,9 @@ python3 train_loop.py --env=ball_in_cup --task=catch --seed=1
 ## Our Results
 
 ## Network Architecture
+<p align="center">
+  <img src="https://github.com/UoA-CARES/NaSA_TD3/blob/main/repo_images/AE_TD3_network_diagram.png">
+</p>
 
 ## Citation
 If you use either the paper  or code in your paper or project, please kindly star this repo and cite our work
