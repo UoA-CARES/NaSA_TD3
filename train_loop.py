@@ -185,8 +185,8 @@ def evaluation_loop(env, agent, frames_stack, total_counter, file_name):
         episode_reward += reward_extrinsic
         video.write(grab_frame(env))
         if done:
-            original_img, reconstruction = agent.get_reconstruction_for_evaluation(state)
-            plot_reconstruction_img(original_img, reconstruction)
+            # original_img, reconstruction = agent.get_reconstruction_for_evaluation(state)
+            # plot_reconstruction_img(original_img, reconstruction)
             logging.info(f" EVALUATION | Eval Episode was completed with {episode_timesteps} steps | Reward= {episode_reward:.3f}")
             state = frames_stack.reset()
             episode_reward = 0
