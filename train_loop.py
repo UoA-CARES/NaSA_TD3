@@ -23,6 +23,10 @@ def save_intrinsic_values(data_reward, filename):
     data = pd.DataFrame.from_dict(data_reward)
     data.to_csv(f"plot_results/{filename}_intrinsic_values", index=False)
 
+def save_evaluation_values(data_eval_reward, filename):
+    data = pd.DataFrame.from_dict(data_eval_reward)
+    data.to_csv(f"plot_results/{filename}_evaluation", index=False)
+
 
 def plot_reward_curve(data_reward, filename):
     data = pd.DataFrame.from_dict(data_reward)
@@ -57,8 +61,8 @@ def train(env, agent, file_name, intrinsic_on, number_stack_frames):
     max_steps_training    = 1_000_000
     max_steps_exploration = 1_000
 
-    batch_size = 32
-    G          = 5
+    batch_size = 128
+    G          = 1
     k          = number_stack_frames
     # ------------------------------------#
 
@@ -81,8 +85,13 @@ def train(env, agent, file_name, intrinsic_on, number_stack_frames):
     episode_reward    = 0
     episode_num       = 0
 
-    historical_reward           = {"step": [], "episode_reward": []}
-    historical_intrinsic_reward = {"step": [], "novelty_rate": [], "surprise_rate": [], "extrinsic_reward": []}
+    historical_reward            = {"step": [], "episode_reward": []}
+    historical_reward_evaluation = {"step": [], "avg_episode_reward": []}
+    historical_intrinsic_reward  = {"step": [], "novelty_rate": [], "surprise_rate": [], "extrinsic_reward": []}
+
+    # To store zero at the beginning
+    historical_reward_evaluation["step"].append(0)
+    historical_reward_evaluation["avg_episode_reward"].append(0)
 
     start_time = time.time()
     state      = frames_stack.reset()  # unit8 , (9, 84 , 84)
@@ -150,9 +159,9 @@ def train(env, agent, file_name, intrinsic_on, number_stack_frames):
             episode_num       += 1
 
             if episode_num % 10 == 0:
-                print("*************--Evaluation--*************")
+                print("*************--Evaluation Loop--*************")
                 plot_reward_curve(historical_reward, filename=file_name)
-                evaluation_loop(env, agent, frames_stack, total_step_counter, file_name)
+                evaluation_loop(env, agent, frames_stack, total_step_counter, file_name, historical_reward_evaluation)
                 print("--------------------------------------------")
 
     agent.save_models(filename=file_name)
@@ -164,8 +173,8 @@ def train(env, agent, file_name, intrinsic_on, number_stack_frames):
     logging.info("All GOOD AND DONE :)")
 
 
-def evaluation_loop(env, agent, frames_stack, total_counter, file_name):
-    max_steps_evaluation = 1_000
+def evaluation_loop(env, agent, frames_stack, total_counter, file_name, historical_reward_evaluation):
+    max_steps_evaluation = 10_000
     episode_timesteps    = 0
     episode_reward       = 0
     episode_num          = 0
@@ -173,29 +182,44 @@ def evaluation_loop(env, agent, frames_stack, total_counter, file_name):
     state = frames_stack.reset()
     frame = grab_frame(env)
 
+    historical_episode_reward_evaluation = []
+
+
     fps = 30
     video_name = f'videos_evaluation/{file_name}_{total_counter}.mp4'
     height, width, channels = frame.shape
     video = cv2.VideoWriter(video_name, cv2.VideoWriter_fourcc(*'mp4v'), fps, (width, height))
 
-    for total_step_counter in range(int(max_steps_evaluation)):
+    for total_step_counter in range(max_steps_evaluation):
         episode_timesteps += 1
         action = agent.select_action_from_policy(state, evaluation=True)
         state, reward_extrinsic, done = frames_stack.step(action)
         episode_reward += reward_extrinsic
-        video.write(grab_frame(env))
+
+        # Render a video just for one episode
+        if episode_num == 0:
+            video.write(grab_frame(env))
+
         if done:
             # original_img, reconstruction = agent.get_reconstruction_for_evaluation(state)
             # plot_reconstruction_img(original_img, reconstruction)
-            logging.info(f" EVALUATION | Eval Episode was completed with {episode_timesteps} steps | Reward= {episode_reward:.3f}")
+            logging.info(f" EVALUATION | Eval Episode {episode_num + 1} was completed with {episode_timesteps} steps | Reward= {episode_reward:.3f}")
+            historical_episode_reward_evaluation.append(episode_reward)
+
             state = frames_stack.reset()
-            episode_reward = 0
+            episode_reward    = 0
             episode_timesteps = 0
-            episode_num += 1
+            episode_num       += 1
+
+    mean_reward_evaluation = np.round(np.mean(historical_episode_reward_evaluation), 2)
+    historical_reward_evaluation["avg_episode_reward"].append(mean_reward_evaluation)
+    historical_reward_evaluation["step"].append(total_counter)
+    save_evaluation_values(historical_reward_evaluation, file_name)
     video.release()
 
+
 def grab_frame(env):
-    frame = env.physics.render(camera_id=0, height=480, width=600)
+    frame = env.physics.render(camera_id=0, height=240, width=300)
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB) # Convert to BGR for use with OpenCV
     return frame
 
@@ -205,6 +229,7 @@ def define_parse_args():
     parser = ArgumentParser()
     parser.add_argument('--intrinsic', type=bool, default=False)
     parser.add_argument('--seed', type=int, default=1)
+    parser.add_argument('--latent_size', type=int, default=50)
     parser.add_argument('--env',  type=str, default="ball_in_cup")
     parser.add_argument('--task', type=str, default="catch")
     args   = parser.parse_args()
@@ -224,7 +249,7 @@ def main():
     env         = suite.load(domain_name, task_name, task_kwargs={'random': seed})
     action_spec = env.action_spec()
     action_size = action_spec.shape[0]
-    latent_size = 50
+    latent_size = args.latent_size
     number_stack_frames = 3
 
     # Create Directories
