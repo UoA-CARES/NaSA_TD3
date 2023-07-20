@@ -26,7 +26,9 @@ def save_intrinsic_values(data_reward, filename):
 def save_evaluation_values(data_eval_reward, filename):
     data = pd.DataFrame.from_dict(data_eval_reward)
     data.to_csv(f"plot_results/{filename}_evaluation", index=False)
-
+    data.plot(x='step', y='avg_reward', title="Evaluation Reward Curve")
+    plt.savefig(f"plot_results/{filename}_evaluation.png")
+    plt.close()
 
 def plot_reward_curve(data_reward, filename):
     data = pd.DataFrame.from_dict(data_reward)
@@ -62,7 +64,7 @@ def train(env, agent, file_name, intrinsic_on, number_stack_frames):
     max_steps_exploration = 1_000
 
     batch_size = 128
-    G          = 1
+    G          = 5
     k          = number_stack_frames
     # ------------------------------------#
 
@@ -138,12 +140,12 @@ def train(env, agent, file_name, intrinsic_on, number_stack_frames):
                     experience['done'],
                 ))
 
-                if intrinsic_on:
-                    agent.train_predictive_model((
-                        experience['state'],
-                        experience['action'],
-                        experience['next_state']
-                    ))
+            if intrinsic_on:
+                agent.train_predictive_model((
+                    experience['state'],
+                    experience['action'],
+                    experience['next_state']
+                ))
 
         if done:
             episode_duration = time.time() - start_time
