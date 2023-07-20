@@ -26,7 +26,7 @@ def save_intrinsic_values(data_reward, filename):
 def save_evaluation_values(data_eval_reward, filename):
     data = pd.DataFrame.from_dict(data_eval_reward)
     data.to_csv(f"plot_results/{filename}_evaluation", index=False)
-    data.plot(x='step', y='avg_reward', title="Evaluation Reward Curve")
+    data.plot(x='step', y='avg_episode_reward', title="Evaluation Reward Curve")
     plt.savefig(f"plot_results/{filename}_evaluation.png")
     plt.close()
 
