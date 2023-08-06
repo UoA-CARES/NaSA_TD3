@@ -26,17 +26,17 @@ def save_intrinsic_values(data_reward, filename):
 def save_evaluation_values(data_eval_reward, filename):
     data = pd.DataFrame.from_dict(data_eval_reward)
     data.to_csv(f"plot_results/{filename}_evaluation", index=False)
-    data.plot(x='step', y='avg_episode_reward', title="Evaluation Reward Curve")
-    plt.savefig(f"plot_results/{filename}_evaluation.png")
-    plt.close()
+    #data.plot(x='step', y='avg_episode_reward', title="Evaluation Reward Curve")
+    #plt.savefig(f"plot_results/{filename}_evaluation.png")
+    #plt.close()
 
 def plot_reward_curve(data_reward, filename):
     data = pd.DataFrame.from_dict(data_reward)
     data.to_csv(f"plot_results/{filename}", index=False)
-    data.plot(x='step', y='episode_reward', title="Reward Curve")
-    plt.title(filename)
-    plt.savefig(f"plot_results/{filename}.png")
-    plt.close()
+    #data.plot(x='step', y='episode_reward', title="Reward Curve")
+    #plt.title(filename)
+    #plt.savefig(f"plot_results/{filename}.png")
+    #plt.close()
 
 def plot_reconstruction_img(original, reconstruction):
     input_img      = original[0]/255
