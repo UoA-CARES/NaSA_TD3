@@ -1,13 +1,14 @@
 # NaSA_TD3
-Official PyTorch Implementation of Novelty and Surprise TD3  (NaSA-TD3)..
+Official PyTorch Implementation of Novelty and Surprise TD3  (NaSA-TD3).
 
 ## General Overview
-Description here
+See our paper blog here (add link)
 
 
 ## Requirements
 Cares Reinforcement Learning Repository
 Deep Mind Control Suite
+Complete list
 
 
 ## Network Architecture
@@ -23,6 +24,7 @@ To train the NaSA-TD3 algorithm on the deep mind control suite from image-based 
 python3 train_loop.py --env=ball_in_cup --task=catch --seed=1
 ```
 ## Our Results
+plot result here
 
 
 
