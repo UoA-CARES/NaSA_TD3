@@ -9,7 +9,7 @@ See our Paper-Blog for details  for pseudocode with more details of the training
 
 |Library         | Version (TESTED) |
 |----------------------|----|
-| OUR Support Libray [link](https://github.com/UoA-CARES/cares_reinforcement_learning)|
+| OUR Support Libray |[link](https://github.com/UoA-CARES/cares_reinforcement_learning)|
 | DeepMind Control Suite |[link](https://github.com/deepmind/dm_control) |
 
 
