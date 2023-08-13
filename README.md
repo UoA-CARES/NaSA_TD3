@@ -2,13 +2,15 @@
 Official PyTorch Implementation of Novelty and Surprise TD3  (NaSA-TD3).
 
 ## General Overview
-See our paper blog here (add link)
+See our Paper-Blog for details  for pseudocode with more details of the training process as well as details of hyperparameters, full source code and videos of each task 
+ [Paper-Blog](https://sites.google.com/aucklanduni.ac.nz/nasa-td3-pytorch/home)
 
+## Prerequisites
 
-## Requirements
-Cares Reinforcement Learning Repository
-Deep Mind Control Suite
-Complete list
+|Library         | Version (TESTED) |
+|----------------------|----|
+| OUR Support Libray [link](https://github.com/UoA-CARES/cares_reinforcement_learning)|
+| DeepMind Control Suite |[link](https://github.com/deepmind/dm_control) |
 
 
 ## Network Architecture
