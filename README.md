@@ -2,8 +2,8 @@
 Official PyTorch Implementation of Novelty and Surprise TD3  (NaSA-TD3).
 
 ## General Overview
-See our Paper-Blog for details  for pseudocode with more details of the training process as well as details of hyperparameters, full source code and videos of each task 
- [Paper-Blog](https://sites.google.com/aucklanduni.ac.nz/nasa-td3-pytorch/home)
+See our  [Paper-Blog](https://sites.google.com/aucklanduni.ac.nz/nasa-td3-pytorch/home) for details  for pseudocode with more details of the training process as well as details of hyperparameters, full source code and videos of each task.
+
 
 ## Prerequisites
 
