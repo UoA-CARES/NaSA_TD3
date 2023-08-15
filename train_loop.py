@@ -169,8 +169,8 @@ def train(env, agent, file_name, intrinsic_on, number_stack_frames):
     agent.save_models(filename=file_name)
     plot_reward_curve(historical_reward, filename=file_name)
 
-    if intrinsic_on:
-        save_intrinsic_values(historical_intrinsic_reward, file_name)
+    # if intrinsic_on:
+    #     save_intrinsic_values(historical_intrinsic_reward, file_name)
 
     logging.info("All GOOD AND DONE :)")
 
