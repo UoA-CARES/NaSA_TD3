@@ -7,9 +7,9 @@ See our  [Paper-Blog](https://sites.google.com/aucklanduni.ac.nz/nasa-td3-pytorc
 
 ## Prerequisites
 
-|Library         | Version (TESTED) |
+|Library         | Version |
 |----------------------|----|
-| OUR Support Libray |[link](https://github.com/UoA-CARES/cares_reinforcement_learning)|
+| Our RL Support Libray |[link](https://github.com/UoA-CARES/cares_reinforcement_learning)|
 | DeepMind Control Suite |[link](https://github.com/deepmind/dm_control) |
 
 
