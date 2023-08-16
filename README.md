@@ -23,7 +23,7 @@ See our  [Paper-Blog](https://sites.google.com/aucklanduni.ac.nz/nasa-td3-pytorc
 ## Instructions Training
 To train the NaSA-TD3 algorithm on the deep mind control suite from image-based observations, please run:
 ```
-python3 train_loop.py --env=ball_in_cup --task=catch --seed=1
+python3 train_loop.py --env=ball_in_cup --task=catch --seed=1 --intrinsic=True
 ```
 ## Our Results
 plot result here
@@ -31,4 +31,4 @@ plot result here
 
 
 ## Citation
-If you use either the paper  or code in your paper or project, please kindly star this repo and cite our work
+If you use either the paper or code in your paper or project, please kindly star this repo and cite our work.
