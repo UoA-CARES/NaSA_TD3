@@ -231,7 +231,7 @@ def define_parse_args():
     parser = ArgumentParser()
     parser.add_argument('--intrinsic', type=bool, default=False)
     parser.add_argument('--seed', type=int, default=1)
-    parser.add_argument('--latent_size', type=int, default=50)
+    parser.add_argument('--latent_size', type=int, default=200)
     parser.add_argument('--env',  type=str, default="ball_in_cup")
     parser.add_argument('--task', type=str, default="catch")
     args   = parser.parse_args()
