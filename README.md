@@ -12,13 +12,11 @@ See our  [Paper-Blog](https://sites.google.com/aucklanduni.ac.nz/nasa-td3-pytorc
 | Our RL Support Libray |[link](https://github.com/UoA-CARES/cares_reinforcement_learning)|
 | DeepMind Control Suite |[link](https://github.com/deepmind/dm_control) |
 
-[//]: # (It’s a little bizarre, but it works with MacDown and Pandoc.
+
 ## Network Architecture
 <p align="center">
   <img src="https://github.com/UoA-CARES/NaSA_TD3/blob/main/repo_images/AE_TD3_network_diagram.png">
 </p>
-)
-
 
 
 ## Instructions Training
