@@ -28,8 +28,7 @@ python3 train_loop.py --env=ball_in_cup --task=catch --seed=1 --intrinsic=True
 
 
 <p align="center">
-  <img src="https://github.com/UoA-CARES/NaSA_TD3/blob/main/repo_images/results_simulations.png
-">
+  <img src="https://github.com/UoA-CARES/NaSA_TD3/blob/main/repo_images/results_simulations.png">
 </p>
 
 
