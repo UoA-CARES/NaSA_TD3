@@ -14,7 +14,6 @@ See our  [Paper-Blog](https://sites.google.com/aucklanduni.ac.nz/nasa-td3-pytorc
 
 
 ## Network Architecture
-
 <p align="center">
   <img src="https://github.com/UoA-CARES/NaSA_TD3/blob/main/repo_images/AE_TD3_network_diagram.png">
 </p>
@@ -26,7 +25,11 @@ To train the NaSA-TD3 algorithm on the deep mind control suite from image-based 
 python3 train_loop.py --env=ball_in_cup --task=catch --seed=1 --intrinsic=True
 ```
 ## Our Results
-plot result here
+
+
+<p align="center">
+  <img src="https://github.com/UoA-CARES/NaSA_TD3/blob/main/repo_images/results_simulations.png">
+</p>
 
 
 
