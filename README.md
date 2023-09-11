@@ -1,5 +1,5 @@
 # NaSA_TD3
-Official PyTorch Implementation of NaSA-TD3: Pixel-Based Deep Reinforcement Learning with Intrinsically Motivated Stimuli
+Official PyTorch Implementation of NaSA-TD3: Image-Based Deep Reinforcement Learning with Intrinsically Motivated Stimuli
 
 ## General Overview
 See our  [Paper-Blog](https://sites.google.com/aucklanduni.ac.nz/nasa-td3-pytorch/home) for details  for pseudocode with more details of the training process as well as details of hyperparameters, full source code and videos of each task.
